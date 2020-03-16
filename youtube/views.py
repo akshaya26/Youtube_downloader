@@ -19,7 +19,7 @@ def download(request):
         print(link)
 
         # obtaining downloads path
-        save_path=os.path.expanduser("~") + '/Downloads'
+        save_path=os.path.expanduser("~") 
 
         try:
             ob = YouTube(link)
