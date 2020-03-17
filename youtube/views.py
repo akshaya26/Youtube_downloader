@@ -19,7 +19,7 @@ def download(request):
         print(link)
 
         # obtaining downloads path
-        save_path=os.path.expanduser("~") 
+        save_path=os.path.expanduser("~")
 
         try:
             ob = YouTube(link)
@@ -72,6 +72,7 @@ def download(request):
             #dowloads video altered filename to specified output path
         mp4.download(output_path = save_path,filename = name)
         print("File downloaded")
+        print(save_path + name)
 
         #if request is generated for .mp3 download
         if(request.POST.get('type')=="audio"):
