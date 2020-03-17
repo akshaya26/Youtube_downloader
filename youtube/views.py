@@ -19,7 +19,7 @@ def download(request):
         print(link)
 
         # obtaining downloads path
-        save_path =os.path.join(os.path.join(os.environ['USERPROFILE']),'Downloads')
+        save_path =os.path.join(os.path.join(os.path.expanduser('~')),'Downloads')
 
         try:
             ob = YouTube(link)
