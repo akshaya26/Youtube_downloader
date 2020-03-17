@@ -6,6 +6,7 @@ import moviepy.editor as mp #used to convert video to audio
 import os
 import re
 
+
 #Each time an audio or video request is generated below function is called.
 #for audio the actual videofile is downloaded and then converted to audio using moiepy.editor and renamed as .mp3
 
@@ -31,7 +32,8 @@ def download(request):
 
         # returns all streams of video and audio. from that first videostram is chosen
         mp4 = ob.streams.first()
-        print(mp4)
+
+
         print(str(ob.title))
 
         #video is saved with titleof video to specified path.However saved filename contains spaces.Below block is to create an
@@ -70,7 +72,7 @@ def download(request):
 
 
             #dowloads video altered filename to specified output path
-        mp4.download(output_path = save_path,filename = name)
+        #mp4.download(output_path = save_path,filename = name)
         print("File downloaded")
         print(save_path + name)
 
@@ -84,4 +86,10 @@ def download(request):
             #for deleteing the actual download .mp4 file
             os.remove(path)
 
+        return render(request,'youtube/download.html',{'downloadlink' : mp4.url})
+
     return render(request,'youtube/youtube_index.html')
+
+
+def downloadspage(request):
+    return HttpResponse("download")
