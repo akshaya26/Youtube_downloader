@@ -47,25 +47,25 @@ def download(request):
 
         #check if youtube_downloader file already exists
 
-        filelst=[]
+        # filelst=[]
 
 
         #filenames to be saved as youtube_downloader(1).mp4,youtube_downloader(2).mp4
-        for file in os.listdir(save_path):
-            if (file.startswith("youtube_downloader") and file.endswith(".mp4")):
-                filelst.append(file)
-        print(filelst)
-        if (len(filelst) == 0):
-            name = "youtube_downloader(0)"
-        else:
-            repeatregex = re.compile(r'\([0-9]+\)')
-            repeatval = repeatregex.search(filelst[-1])
-            count = repeatval.group()
-            if (count == None):
-                name = "youtube_downloader(1)"
-            else:
-                filecount = re.compile(r'[\d]+').search(count).group()
-                name = "youtube_downloader(" + str(int(filecount) + 1) + ")"
+        # for file in os.listdir(save_path):
+        #     if (file.startswith("youtube_downloader") and file.endswith(".mp4")):
+        #         filelst.append(file)
+        # print(filelst)
+        # if (len(filelst) == 0):
+        #     name = "youtube_downloader(0)"
+        # else:
+        #     repeatregex = re.compile(r'\([0-9]+\)')
+        #     repeatval = repeatregex.search(filelst[-1])
+        #     count = repeatval.group()
+        #     if (count == None):
+        #         name = "youtube_downloader(1)"
+        #     else:
+        #         filecount = re.compile(r'[\d]+').search(count).group()
+        #         name = "youtube_downloader(" + str(int(filecount) + 1) + ")"
 
 
 
@@ -74,17 +74,18 @@ def download(request):
             #dowloads video altered filename to specified output path
         #mp4.download(output_path = save_path,filename = name)
         print("File downloaded")
-        print(save_path + name)
+        # print(save_path + name)
 
         #if request is generated for .mp3 download
-        if(request.POST.get('type')=="audio"):
-            print("audio")
-            path = save_path + '\\' + name + ".mp4" #file name
-            newname = os.path.join(save_path, name + ".mp3") #.mp3 file
-            audio = mp.AudioFileClip(path)
-            audio.write_audiofile(newname)
-            #for deleteing the actual download .mp4 file
-            os.remove(path)
+
+        # if(request.POST.get('type')=="audio"):
+        #     print("audio")
+        #     path = save_path + '\\' + name + ".mp4" #file name
+        #     newname = os.path.join(save_path, name + ".mp3") #.mp3 file
+        #     audio = mp.AudioFileClip(path)
+        #     audio.write_audiofile(newname)
+        #     #for deleteing the actual download .mp4 file
+        #     os.remove(path)
 
         return render(request,'youtube/download.html',{'downloadlink' : mp4.url})
 
