@@ -36,16 +36,7 @@ def download(request):
 
         print(str(ob.title))
 
-        #video is saved with titleof video to specified path.However saved filename contains spaces.Below block is to create an
-        #  _ seperated filename
-        # lst = str(ob.title).split()
-        # print(lst)
-        # name = ""
-        # for i in range(int(len(lst))):
-        #     name = name + lst[i] + "_"
-        # print(name)
-
-        #check if youtube_downloader file already exists
+        #check if youtube_downloader file already exists(Not required when in production)
 
         # filelst=[]
 
@@ -66,13 +57,10 @@ def download(request):
         #     else:
         #         filecount = re.compile(r'[\d]+').search(count).group()
         #         name = "youtube_downloader(" + str(int(filecount) + 1) + ")"
-
-
-
-
-
-            #dowloads video altered filename to specified output path
+        #dowloads video altered filename to specified output path
         #mp4.download(output_path = save_path,filename = name)
+
+
         print("File downloaded")
         # print(save_path + name)
 
@@ -87,9 +75,10 @@ def download(request):
         #     #for deleteing the actual download .mp4 file
         #     os.remove(path)
 
-        return render(request,'youtube/download.html',{'downloadlink' : mp4.url})
+        return render(request,'youtube/youtube_index.html',{'downloadlink' : mp4.url,'val': True,'buttonval':False})
 
-    return render(request,'youtube/youtube_index.html')
+    return render(request,'youtube/youtube_index.html',
+                  {'buttonval':True})
 
 
 def downloadspage(request):

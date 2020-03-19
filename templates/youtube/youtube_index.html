@@ -13,7 +13,7 @@
   <body>
   <div class="jumbotron">
   <h1 class="display-4">Youtube Downloader</h1>
-  <p class="lead">The easiest way to download youtube videos in .mp4 or .mp3 format is here!!</p>
+  <p class="lead">The easiest way to download youtube videos format is here!!</p>
   </div>
    <!----------------------------------------- -->
  <div class="container">
@@ -26,27 +26,8 @@
     </div>
   </div>
 
-  <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Type of file </legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="type"  value="audio" >
-          <label class="form-check-label" for="gridRadios1">
-          Audio(.mp3)
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="type" value="video">
-          <label class="form-check-label" for="gridRadios2">
-          Video(.mp4)
-          </label>
-        </div>
 
-      </div>
-    </div>
-  </fieldset>
-
+{% if buttonval %}
   <div class="form-group row">
 
     <div class="col-sm-12">
@@ -54,8 +35,25 @@
     <button type="submit" class="btn btn-primary">Submit</button>
             </center>
     </div>
+      {% else %}
+      <div class="form-group row">
 
+    <div class="col-sm-12">
+        <center>
+    <button type="submit" class="btn btn-primary" disabled="disabled">Submit</button>
+            </center>
+    </div>
+          {% endif %}
 
+      <br>
+      <br>
+<div class="container">
+{% if val %}
+      <center>
+       <a href="{{downloadlink}}"><h4>Click here to start download </h4></a>
+          </center>
+      {% endif %}
+    </div>
   </div>
 
 </form>
