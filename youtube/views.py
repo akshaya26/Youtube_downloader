@@ -5,7 +5,9 @@ from pytube  import YouTube # for video
 import moviepy.editor as mp #used to convert video to audio
 import os
 import re
-import youtube_dl
+import pafy
+import urllib
+import xmltodict
 
 #Each time an audio or video request is generated below function is called.
 #for audio the actual videofile is downloaded and then converted to audio using moiepy.editor and renamed as .mp3
@@ -13,35 +15,76 @@ import youtube_dl
 def download(request):
 
     if (request.method=="POST"):
-        print("video")
         # link is the name of input type url
         link = request.POST.get('link','nolink')
-
         print(link)
+        link_regex = re.compile(r'https://www.youtube.com/watch').search(link)
+        if(link_regex==None):
+            print("url")
+            return render(request,'youtube/youtube_index.html',{'alert_url':True,'buttonval': True})
+        else:
+            type = request.POST.get('type')
+            print(type)
+
+            if (type=='audio'):
+                print("audio")
+                audio = pafy.new(link)
+                best = audio.getbestaudio()
+                val = best.url
+                print(val)
+                if (val.startswith("https")):
+                    regexurl = re.compile(r'^https://manifest').search(val)
+                    if (regexurl == None):
+                        req_val=val
+                        print(val)
+                    else:
+                        print("https manifest url")
+                        hit = urllib.request.urlopen(val)
+                        data_xml = hit.read()
+                        xmlparsed = xmltodict.parse(data_xml)
+                        # print(xmlparsed)
+                        req_val = xmlparsed['MPD']['Period']['AdaptationSet'][0]['Representation'][0]['BaseURL']
+                        print(req_val)
+                        print("done")
+
+                elif (val.startswith("http")):
+                    regexurl = re.compile(r'http://manifest').search(val)
+                    if (regexurl == None):
+                        req_val=val
+                        print(val)
+                    else:
+                        print("http manifest url")
+                        hit = urllib.request.urlopen(val)
+                        data_xml = hit.read()
+                        xmlparsed = xmltodict.parse(data_xml)
+                        # print(xmlparsed)
+                        req_val = xmlparsed['MPD']['Period']['AdaptationSet'][0]['Representation'][0]['BaseURL']
+                        print(req_val)
+                        print("done")
 
 
 
-        # simulate: skip_download: extract_flat:
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-            'forceurl': True,
-        }
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([link])
+
+            elif(type=='video'):
+                print("video")
+                video = pafy.new(link)
+                best = video.getbest()
+                req_val =best.url
+                print(req_val)
 
 
+            else:
+                print("type")
+                return render(request, 'youtube/youtube_index.html',
+                              {'alert_type': True,'buttonval': True})
 
+            return render(request, 'youtube/youtube_index.html',
+                      {'downloadlink': req_val, 'value': True, 'buttonval': False})
 
+    return render(request, 'youtube/youtube_index.html',
+                      {'buttonval': True})
 
-
-
-
-#*******************************************
+    #*******************************************
         # obtaining downloads path
         # save_path =os.path.join(os.path.join(os.path.expanduser('~')),'Downloads')
         #
@@ -97,13 +140,9 @@ def download(request):
         # #     audio.write_audiofile(newname)
         # #     #for deleteing the actual download .mp4 file
         # #     os.remove(path)
-        return render(request, 'youtube/youtube_index.html', {'val': True, 'buttonval': False})
 
     # return render(request,'youtube/youtube_index.html',{'downloadlink' : mp4.url,'val': True,'buttonval':False})
 
-    return render(request,'youtube/youtube_index.html',
-                  {'buttonval':True})
 
 
-def downloadspage(request):
-    return HttpResponse("download")
+
