@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c2934a2-34a5-43b1-ad52-62b4302205a9" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/templates/youtube/youtube_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/youtube/youtube_index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/youtube/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/youtube/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +38,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/youtube/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+            <state relative-caret-position="132">
+              <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -67,8 +68,8 @@
       <file leaf-file-name="youtube_index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/youtube/youtube_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="87" column="11" lean-forward="true" selection-end-line="104" />
+            <state relative-caret-position="115">
+              <caret line="55" column="10" lean-forward="true" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -96,6 +97,7 @@
     <findStrings>
       <find>save</find>
       <find>col-sm-12</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -109,8 +111,8 @@
         <option value="$PROJECT_DIR$/youtube_Downloader/settings.py" />
         <option value="$PROJECT_DIR$/youtube/urls.py" />
         <option value="$PROJECT_DIR$/templates/youtube/download.html" />
-        <option value="$PROJECT_DIR$/templates/youtube/youtube_index.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/templates/youtube/youtube_index.html" />
         <option value="$PROJECT_DIR$/youtube/views.py" />
       </list>
     </option>
@@ -195,7 +197,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -585,13 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/youtube/youtube_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="87" column="11" lean-forward="true" selection-end-line="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -606,10 +600,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/youtube/youtube_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="55" column="10" lean-forward="true" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/youtube/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+        <state relative-caret-position="132">
+          <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
