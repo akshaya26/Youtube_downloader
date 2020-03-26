@@ -20,59 +20,60 @@ def download(request):
         # print(link)
         #links from youtube are different when copied from phone and from desktop
         link_regex = re.compile(r'https://youtu').search(link)
-        linkpc_regex =re.compile(r'https://www.youtube.com').search(link)
+        # linkpc_regex =re.compile(r'https://www.youtube.com').search(link)
         #if invalid url>>alert
-        if(link_regex==None and linkpc_regex==None):
+        # if(link_regex==None and linkpc_regex==None):
+        # if(link_regex==None ):
             # print("url")
-            return render(request,'youtube/youtube_index.html',{'alert_url':True,'buttonval': True})
-        else:
-            type = request.POST.get('type')
-            # print(type)
-            #for audio type
-            if (type=='audio'):
-                # print("audio")
-                audio = pafy.new(link)
-                best = audio.getbestaudio()
-                val = best.url
-                # print(val)
-                #manifest and normal URLs exist.Normal URLs are direct downloadable ,
-                # Manifest need to be decoded to get downloadable URL
-                if (val.startswith("https")):
-                    regexurl = re.compile(r'^https://manifest').search(val)
-                    if (regexurl == None):
-                        req_val=val
-                        # print(val)
-                    else:
-                        # print("https manifest url")
-                        #hitting URL generated an encoded binary file
-                        hit = urllib.request.urlopen(val)
-                        data_xml = hit.read()
-                        xmlparsed = xmltodict.parse(data_xml)
-                        # print(xmlparsed)
-                        # Parsing XML using tags
-                        req_val = xmlparsed['MPD']['Period']['AdaptationSet'][0]['Representation'][0]['BaseURL']
-                        # print(req_val)
-                        # print("done")
+            # return render(request,'youtube/youtube_index.html',{'alert_url':True,'buttonval': True})
+        # else:
+        type = request.POST.get('type')
+        # print(type)
+        # for audio type
+        if (type == 'audio'):
+            # print("audio")
+            audio = pafy.new(link)
+            best = audio.getbestaudio()
+            val = best.url
+            # print(val)
+            # manifest and normal URLs exist.Normal URLs are direct downloadable ,
+            # Manifest need to be decoded to get downloadable URL
+            if (val.startswith("https")):
+                regexurl = re.compile(r'^https://manifest').search(val)
+                if (regexurl == None):
+                    req_val = val
+                    # print(val)
+                else:
+                    # print("https manifest url")
+                    # hitting URL generated an encoded binary file
+                    hit = urllib.request.urlopen(val)
+                    data_xml = hit.read()
+                    xmlparsed = xmltodict.parse(data_xml)
+                    # print(xmlparsed)
+                    # Parsing XML using tags
+                    req_val = xmlparsed['MPD']['Period']['AdaptationSet'][0]['Representation'][0]['BaseURL']
+                    # print(req_val)
+                    # print("done")
 
-                elif (val.startswith("http")):
-                    regexurl = re.compile(r'http://manifest').search(val)
-                    if (regexurl == None):
-                        req_val=val
-                        # print(val)
-                    else:
-                        # print("http manifest url")
-                        hit = urllib.request.urlopen(val)
-                        data_xml = hit.read()
-                        xmlparsed = xmltodict.parse(data_xml)
-                        # print(xmlparsed)
-                        req_val = xmlparsed['MPD']['Period']['AdaptationSet'][0]['Representation'][0]['BaseURL']
-                        # print(req_val)
-                        # print("done")
-
-
+            elif (val.startswith("http")):
+                regexurl = re.compile(r'http://manifest').search(val)
+                if (regexurl == None):
+                    req_val = val
+                    # print(val)
+                else:
+                    # print("http manifest url")
+                    hit = urllib.request.urlopen(val)
+                    data_xml = hit.read()
+                    xmlparsed = xmltodict.parse(data_xml)
+                    # print(xmlparsed)
+                    req_val = xmlparsed['MPD']['Period']['AdaptationSet'][0]['Representation'][0]['BaseURL']
+                    # print(req_val)
+                    # print("done")
 
 
-            elif(type=='video'):
+
+
+        elif(type=='video'):
                 # print("video")
                 video = pafy.new(link)
                 best = video.getbest()
@@ -80,12 +81,12 @@ def download(request):
                 # print(req_val)
 
 
-            else:
+        else:
                 # print("type")
                 return render(request, 'youtube/youtube_index.html',
                               {'alert_type': True,'buttonval': True})
 
-            return render(request, 'youtube/youtube_index.html',
+        return render(request, 'youtube/youtube_index.html',
                       {'downloadlink': req_val, 'value': True, 'buttonval': False})
 
     return render(request, 'youtube/youtube_index.html',
