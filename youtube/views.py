@@ -18,7 +18,7 @@ def download(request):
         # link is the name of input type url
         link = request.POST.get('link','nolink')
         print(link)
-        link_regex = re.compile(r'https://www.youtube.com/watch').search(link)
+        link_regex = re.compile(r'https://www.youtu').search(link)
         if(link_regex==None):
             print("url")
             return render(request,'youtube/youtube_index.html',{'alert_url':True,'buttonval': True})
